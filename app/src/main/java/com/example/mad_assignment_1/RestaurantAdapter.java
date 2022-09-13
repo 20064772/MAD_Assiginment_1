@@ -1,5 +1,6 @@
 package com.example.mad_assignment_1;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
 
+
+        holder.select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
     }
 
     @Override

@@ -19,5 +19,12 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
         logo = itemView.findViewById(R.id.logo);
         name = itemView.findViewById(R.id.name);
         select = itemView.findViewById(R.id.select);
+
+       /* select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
     }
 }
