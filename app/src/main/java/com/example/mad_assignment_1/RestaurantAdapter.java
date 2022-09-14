@@ -5,9 +5,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
 
+    private SharedViewModel viewModel;
+    List<Restaurant> restaurantList;
+    public RestaurantAdapter(){
+
+    }
 
     @NonNull
     @Override
@@ -18,17 +24,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
 
-
-        holder.select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return restaurantList.size();
     }
 }

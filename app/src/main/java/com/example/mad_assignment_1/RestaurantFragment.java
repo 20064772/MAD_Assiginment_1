@@ -17,7 +17,7 @@ import android.view.ViewGroup;
  */
 public class RestaurantFragment extends Fragment {
 
-
+    private SharedViewModel viewModel;
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -37,10 +37,11 @@ public class RestaurantFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.fragment_restaurant,container, false);
         RecyclerView rv = v.findViewById(R.id.RestaurantRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        RestaurantAdapter menuAdapter = new RestaurantAdapter();
+        RestaurantAdapter menuAdapter = new RestaurantAdapter();//maybe like this
         rv.setAdapter(menuAdapter);
         return v;
     }
