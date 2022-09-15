@@ -3,13 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/drawable-xxxhdpi/mcdonalds.xml" value="0.1565" />
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/drawable/mcdonalds.xml" value="0.1565" />
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/layout/fragment_menu.xml" value="0.5335144927536232" />
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/layout/fragment_random_menu.xml" value="0.5335144927536232" />
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/layout/menu_item.xml" value="0.4420289855072464" />
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/layout/random_menu_item.xml" value="0.33" />
-        <entry key="..\:/MAD_Assiginment_1/app/src/main/res/layout/restaurant_item.xml" value="0.67" />
         <entry key="..\:/Users/20064772/AndroidStudioProjects/Mad_Assignment_1/app/src/main/res/layout/activity_main.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/20064772/AndroidStudioProjects/Mad_Assignment_1/app/src/main/res/layout/fragment_blank.xml" value="0.30480072463768115" />
         <entry key="..\:/Users/20064772/AndroidStudioProjects/Mad_Assignment_1/app/src/main/res/layout/fragment_menu.xml" value="0.30480072463768115" />
@@ -18,6 +11,12 @@
         <entry key="..\:/Users/20064772/AndroidStudioProjects/Mad_Assignment_1/app/src/main/res/layout/menu_view.xml" value="3.0" />
         <entry key="..\:/Users/20064772/AndroidStudioProjects/Mad_Assignment_1/app/src/main/res/layout/restaurant_item.xml" value="0.67" />
         <entry key="..\:/Users/20064772/AndroidStudioProjects/Mad_Assignment_1/app/src/main/res/layout/restaurant_view.xml" value="0.30480072463768115" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res/layout/fragment_restaurant.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res/layout/menu_item.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res/layout/restaurant_item.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.156" />
       </map>
     </option>
   </component>
