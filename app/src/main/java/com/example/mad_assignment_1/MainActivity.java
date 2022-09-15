@@ -12,3 +12,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 }
+
+
+//I think database needs to be read into objects at the start. List<Restaurants>
+//Restarunt holds Menu Object which is list of dishes.
