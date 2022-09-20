@@ -10,6 +10,8 @@ public class SharedViewModel extends ViewModel {
     private MutableLiveData<String> name = new MutableLiveData();
     List<Restaurant> restaurantList;
 
+    public SharedViewModel(){}
+
     public SharedViewModel(List<Restaurant> res){
         name = new MutableLiveData<String>();
         name.setValue("");

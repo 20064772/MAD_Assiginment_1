@@ -8,19 +8,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 
 public class RandomMenuViewHolder extends RecyclerView.ViewHolder {
     ImageView foodImage;
     TextView name;
     TextView resName;
     Button select;
+    private SharedViewModel viewModel;
 
-    public RandomMenuViewHolder(@NonNull View itemView) {
+    public RandomMenuViewHolder(@NonNull View itemView, List<Restaurant> resList, SharedViewModel viewModel) {
         super(itemView);
+        this.viewModel = viewModel;
         foodImage = itemView.findViewById(R.id.foodImage);
         name = itemView.findViewById(R.id.foodName);
         resName = itemView.findViewById(R.id.restaurantName);
         select = itemView.findViewById(R.id.select);
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.setNameMutableLiveData(resList.get(getAdapterPosition()).getName());
+
+
+            }
+        });
 
     }
 }

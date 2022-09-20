@@ -13,16 +13,18 @@ import java.util.Random;
 public class  RandomMenuAdapter extends RecyclerView.Adapter<RandomMenuViewHolder> {
 
     List<Restaurant> restaurantList;
+    private SharedViewModel viewModel;
     Random ran = new Random();
-    public RandomMenuAdapter(List<Restaurant> restaurantList){
+    public RandomMenuAdapter(List<Restaurant> restaurantList, SharedViewModel viewModel){
         this.restaurantList = restaurantList;
+        this.viewModel = viewModel;
     }
     @NonNull
     @Override
     public RandomMenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View v = layoutInflater.inflate(R.layout.random_menu_item,parent,false);
-        RandomMenuViewHolder myViewHolder = new RandomMenuViewHolder(v);
+        RandomMenuViewHolder myViewHolder = new RandomMenuViewHolder(v, restaurantList, viewModel);
         return myViewHolder;
     }
 
@@ -41,6 +43,7 @@ public class  RandomMenuAdapter extends RecyclerView.Adapter<RandomMenuViewHolde
 
     @Override
     public int getItemCount() {
+
         return restaurantList.size();
     }
 }
