@@ -4,11 +4,13 @@ public class Restaurant {
 
     private String name;
     private int drawable;
+    private Menu menu;
 
 
-    public Restaurant(String name, int drawable){
+    public Restaurant(String name, int drawable, Menu menu){
         this.name = name;
         this.drawable = drawable;
+        this.menu = menu;
     }
 
     public String getName(){
@@ -17,5 +19,9 @@ public class Restaurant {
 
     public int getDrawable() {
         return drawable;
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 }
