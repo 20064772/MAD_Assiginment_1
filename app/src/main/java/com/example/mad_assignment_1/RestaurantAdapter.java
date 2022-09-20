@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
@@ -12,9 +14,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
 
     private SharedViewModel viewModel;
     List<Restaurant> restaurantList;
-    public RestaurantAdapter(List<Restaurant> res){
+    public RestaurantAdapter(List<Restaurant> res, SharedViewModel viewModel){
         this.restaurantList = res;
-
+        this.viewModel = viewModel;
     }
 
     @NonNull
@@ -32,6 +34,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
         Restaurant rest = restaurantList.get(position);
         holder.logo.setImageResource(rest.getDrawable());
         holder.name.setText(rest.getName());
+        holder.select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.setNameMutableLiveData(restaurantList.get(holder.getAdapterPosition()).getName());
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                MenuFragment menuFragment = new MenuFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrag, menuFragment).addToBackStack(null).commit();
+            }
+        });
     }
 
     @Override

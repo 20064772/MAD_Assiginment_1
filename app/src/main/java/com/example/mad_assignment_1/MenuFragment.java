@@ -38,6 +38,14 @@ public class MenuFragment extends Fragment {
         restaurantList = viewModel.getRestaurantList();
         resName = String.valueOf(viewModel.getViewModelName());
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+
+
         for (Restaurant i : restaurantList)
         {
             if (i.getName()== resName)
@@ -45,11 +53,6 @@ public class MenuFragment extends Fragment {
                 restaurant = (Restaurant) i;
             }
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_menu,container, false);
         RecyclerView rv = v.findViewById(R.id.MenuRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));

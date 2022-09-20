@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -25,14 +26,7 @@ public class RandomMenuViewHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.foodName);
         resName = itemView.findViewById(R.id.restaurantName);
         select = itemView.findViewById(R.id.select);
-        select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewModel.setNameMutableLiveData(resList.get(getAdapterPosition()).getName());
-
-
-            }
-        });
-
     }
 }
+
+

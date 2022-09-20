@@ -20,7 +20,7 @@ public class RestaurantList {
             hj.addDish("Fried Chicken Classic Burger", "Fried chicken burger", 10.0, R.drawable.hj_fried_chicken_classic);
             hj.addDish("Ultimate Whopper", "A whopper with double beef, double cheese and bacon", 12.0, R.drawable.hj_ultimate_double_whopper);
             hj.addDish("Whopper", "Our famous Flame grilled burger", 9.0, R.drawable.hj_whopper);
-            hj.addDish("Whopper", "Our famous Flame grilled burger with cheese", 9.50, R.drawable.hj_whopper_with_cheese);
+            hj.addDish("Whopper with cheese", "Our famous Flame grilled burger with cheese", 9.50, R.drawable.hj_whopper_with_cheese);
             Restaurant HungryJacks = new Restaurant("Hungry Jack's", R.drawable.hj_logo, hj);
             list.add(HungryJacks);
             Menu kfc = new Menu();

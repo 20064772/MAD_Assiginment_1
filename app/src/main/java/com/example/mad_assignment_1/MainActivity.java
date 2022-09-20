@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         FragmentManager fm = getSupportFragmentManager();
-        RandomMenuFragment rmf = (RandomMenuFragment) fm.findFragmentById(R.id.RandomMenuRecyclerView);
+        RandomMenuFragment rmf = (RandomMenuFragment) fm.findFragmentById(R.id.rmrl);
 
         if (rmf == null)
         {

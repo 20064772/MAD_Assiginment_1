@@ -5,6 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -36,8 +39,16 @@ public class  RandomMenuAdapter extends RecyclerView.Adapter<RandomMenuViewHolde
         holder.foodImage.setImageResource(dish.getDrawable());
         holder.resName.setText(restaurantList.get(position).getName());
         holder.name.setText(dish.getName());
+        holder.select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.setNameMutableLiveData(restaurantList.get(holder.getAdapterPosition()).getName());
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                MenuFragment menuFragment = new MenuFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrag, menuFragment).addToBackStack(null).commit();
 
-
+            }
+        });
 
     }
 
