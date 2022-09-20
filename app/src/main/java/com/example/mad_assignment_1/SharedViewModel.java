@@ -4,14 +4,29 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SharedViewModel extends ViewModel {
-    private MutableLiveData<Restaurant> restaurantMutableLiveData = new MutableLiveData<>();
+import java.util.List;
 
-    public void setRestaurantMutableLiveData(Restaurant restaurant) {
-        restaurantMutableLiveData.setValue(restaurant);
+public class SharedViewModel extends ViewModel {
+    private MutableLiveData<String> name = new MutableLiveData();
+    List<Restaurant> restaurantList;
+
+    public SharedViewModel(List<Restaurant> res){
+        name = new MutableLiveData<String>();
+        name.setValue("");
+        restaurantList = res;
     }
 
-    public LiveData<Restaurant> getViewModelRes(){
-        return restaurantMutableLiveData;
+    public void setNameMutableLiveData(String name) {
+
+        this.name.setValue(name);
+
+    }
+
+    public LiveData<String> getViewModelName(){
+        return name;
+    }
+
+    public List<Restaurant> getRestaurantList() {
+        return restaurantList;
     }
 }

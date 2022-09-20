@@ -22,4 +22,9 @@ public class Menu {
         return menu.size();
     }
 
+    public Dish getDish(int i){
+        return menu.get(i);
+    }
+
+
 }
