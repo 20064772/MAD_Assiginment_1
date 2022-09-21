@@ -16,6 +16,7 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
     TextView name;
     TextView description;
     TextView count;
+    TextView price;
     Button plus;
     Button minus;
 
@@ -26,7 +27,8 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
         description = itemView.findViewById(R.id.description);
         count = itemView.findViewById(R.id.count); // might not be needed
         plus = itemView.findViewById(R.id.plus); //same
-        minus = itemView.findViewById(R.id.minus); //same
+        minus = itemView.findViewById(R.id.minus);
+        price = itemView.findViewById(R.id.price);//same
 
 
 
