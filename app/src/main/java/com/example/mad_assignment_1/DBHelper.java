@@ -1,5 +1,6 @@
 package com.example.mad_assignment_1;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -37,57 +38,12 @@ public class DBHelper extends SQLiteOpenHelper
     {
         /* Turns on foreign key constraints */
         db.execSQL("PRAGMA foreign_keys = ON");
-    
-        /* Creates User Table */
-        db.execSQL("CREATE TABLE " + UserTable.NAME + " (" +
-                UserTable.Columns.EMAIL + " TEXT PRIMARY KEY, " +
-                UserTable.Columns.PASS + " TEXT) "
-        );
 
-        /* Creates Restaurant Table */
-        db.execSQL("CREATE TABLE " + RestaurantTable.NAME + " (" +
-                RestaurantTable.Columns.REST + " TEXT PRIMARY KEY, " +
-                RestaurantTable.Columns.LOGO + " TEXT) "
-        );
-
-        /* Creates Menu Table */
-        db.execSQL("CREATE TABLE " + MenuTable.NAME + " (" +
-                MenuTable.Columns.ITEM + " TEXT, " +
-                MenuTable.Columns.REST + " TEXT, " +
-                MenuTable.Columns.IMG + " TEXT, " +
-                MenuTable.Columns.DESC + " TEXT, " +
-                MenuTable.Columns.PRICE + " REAL, " +
-                "PRIMARY KEY (" +
-                        MenuTable.Columns.ITEM + ", " +
-                        MenuTable.Columns.REST + "), " +
-                "FOREIGN KEY (" + MenuTable.Columns.REST +
-                        ") REFERENCES " + RestaurantTable.NAME +
-                        " (" + RestaurantTable.Columns.REST +
-                        ") ON DELETE CASCADE ON UPDATE NO ACTION )"
-        );
-
-        /* Creates Order History Table */
-        db.execSQL("CREATE TABLE " + OrderHistoryTable.NAME + " (" +
-                OrderHistoryTable.Columns.USER + " TEXT, " +
-                OrderHistoryTable.Columns.DATETIME + " TEXT, " +
-                OrderHistoryTable.Columns.ITEM + " TEXT, " +
-                OrderHistoryTable.Columns.QTY + " INTEGER, " +
-                "PRIMARY KEY (" +
-                        OrderHistoryTable.Columns.USER + ", " +
-                        OrderHistoryTable.Columns.DATETIME + ", " +
-                        OrderHistoryTable.Columns.ITEM + "), " +
-                "FOREIGN KEY (" + OrderHistoryTable.Columns.USER +
-                        ") REFERENCES " + UserTable.NAME +
-                        " (" + UserTable.Columns.EMAIL +
-                        ") ON DELETE CASCADE ON UPDATE NO ACTION, " +
-                "FOREIGN KEY (" + OrderHistoryTable.Columns.ITEM +
-                        ") REFERENCES " + MenuTable.NAME +
-                        " (" + MenuTable.Columns.ITEM +
-                        ") ON DELETE CASCADE ON UPDATE NO ACTION )"
-        );
-
+        createTables(db);
+        fillRestaurantTable(db);
+        fillMenuTable(db);
     }
-    
+
     /**
      * Upgrades database schema
      *
@@ -98,6 +54,168 @@ public class DBHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
 
+    private void createTables(SQLiteDatabase db)
+    {
+        /* Creates User Table */
+        db.execSQL("CREATE TABLE " + UserTable.NAME + " (" +
+                UserTable.Columns.EMAIL + " TEXT PRIMARY KEY, " +
+                UserTable.Columns.PASS + " TEXT) "
+        );
 
+        /* Creates Restaurant Table */
+        db.execSQL("CREATE TABLE " + RestaurantTable.NAME + " (" +
+                RestaurantTable.Columns.REST + " TEXT PRIMARY KEY, " +
+                RestaurantTable.Columns.LOGO + " INTEGER) "
+        );
 
+        /* Creates Menu Table */
+        db.execSQL("CREATE TABLE " + MenuTable.NAME + " (" +
+                MenuTable.Columns.ITEM + " TEXT, " +
+                MenuTable.Columns.REST + " TEXT, " +
+                MenuTable.Columns.IMG + " INTEGER, " +
+                MenuTable.Columns.DESC + " TEXT, " +
+                MenuTable.Columns.PRICE + " REAL, " +
+                "PRIMARY KEY (" +
+                MenuTable.Columns.ITEM + ", " +
+                MenuTable.Columns.REST + "), " +
+                "FOREIGN KEY (" + MenuTable.Columns.REST +
+                ") REFERENCES " + RestaurantTable.NAME +
+                " (" + RestaurantTable.Columns.REST +
+                ") ON DELETE CASCADE ON UPDATE NO ACTION )"
+        );
+
+        /* Creates Order History Table */
+        db.execSQL("CREATE TABLE " + OrderHistoryTable.NAME + " (" +
+                OrderHistoryTable.Columns.USER + " TEXT, " +
+                OrderHistoryTable.Columns.DATETIME + " TEXT, " +
+                OrderHistoryTable.Columns.ITEM + " TEXT, " +
+                OrderHistoryTable.Columns.QTY + " INTEGER, " +
+                "PRIMARY KEY (" +
+                OrderHistoryTable.Columns.USER + ", " +
+                OrderHistoryTable.Columns.DATETIME + ", " +
+                OrderHistoryTable.Columns.ITEM + "), " +
+                "FOREIGN KEY (" + OrderHistoryTable.Columns.USER +
+                ") REFERENCES " + UserTable.NAME +
+                " (" + UserTable.Columns.EMAIL +
+                ") ON DELETE CASCADE ON UPDATE NO ACTION, " +
+                "FOREIGN KEY (" + OrderHistoryTable.Columns.ITEM +
+                ") REFERENCES " + MenuTable.NAME +
+                " (" + MenuTable.Columns.ITEM +
+                ") ON DELETE CASCADE ON UPDATE NO ACTION )"
+        );
+    }
+
+    private void fillRestaurantTable(SQLiteDatabase db)
+    {
+        final String[] restaurantNames = {
+                "Grilld",
+                "Hungry Jack's",
+                "KFC",
+                "McDonald's",
+                "Pizza Hut",
+                "Red Rooster",
+                "Subway",
+                "Zambrero"
+        };
+
+        final int[] restaurantImgs = {
+                R.drawable.grilld_logo,
+                R.drawable.hj_logo,
+                R.drawable.kfc_logo,
+                R.drawable.mcdonalds_logo_1,
+                R.drawable.pizzahut_logo,
+                R.drawable.redrooster_logo,
+                R.drawable.subway_logo,
+                R.drawable.zambrero_logo
+        };
+
+        ContentValues cv = new ContentValues();
+
+        for (int i = 0; i < restaurantImgs.length; i++)
+        {
+            cv.put(RestaurantTable.Columns.REST, restaurantNames[i]);
+            cv.put(RestaurantTable.Columns.LOGO, restaurantImgs[i]);
+
+            db.insertOrThrow(RestaurantTable.NAME, null, cv);
+            cv.clear();
+        }
+    }
+
+    private void fillMenuTable(SQLiteDatabase db)
+    {
+        final String[] restaurantNames = {
+                "Grilld",
+                "Hungry Jack's",
+                "KFC",
+                "McDonald's",
+                "Pizza Hut",
+                "Red Rooster",
+                "Subway",
+                "Zambrero"
+        };
+
+        addDishes(db, restaurantNames[0], new Dish[]{
+                new Dish(R.drawable.grilld_chips_snack, "Chips", "Snack sized hot chips", 5.0),
+                new Dish(R.drawable.grilld_sweetpotatochips, "Sweet Potato Chips", "Snack sized hot sweet potato chips", 6.0),
+                new Dish(R.drawable.grilld_simply_grilld_traditional, "Traditional Grilld", "A simple classic burger", 14.0),
+                new Dish(R.drawable.grilld_crispybaconandcheese, "Crispy Bacon & Cheese Burger", "Our famous burger patty with crispy bacon and cheddar cheese", 15.0),
+                new Dish(R.drawable.grilld_mustardandpickled, "Mustard & Pickle", "Our famous burger with lots of mustard and pickles", 16.0),
+                new Dish(R.drawable.grilld_summersunset, "Summer sunset burger", "Burger with guacamole, grilled pineapple and aioli", 16.0),
+                new Dish(R.drawable.grilld_mighty_trad, "Mighty Traditional Burger", "Our famous burger just MIGHTY", 18.0)
+        });
+
+        addDishes(db, restaurantNames[1], new Dish[]{
+                new Dish(R.drawable.hj_double_cheeseburger, "Double Cheeseburger", "Flame grilled burger with double beef and double cheese", 10.0),
+                new Dish(R.drawable.hj_whopper, "Whopper", "Our famous flame grilled burger", 9.0),
+                new Dish(R.drawable.hj_whopper_with_cheese, "Whopper with Cheese", "Our famous flame grilled burger with cheese", 9.50),
+                new Dish(R.drawable.hj_ultimate_double_whopper, "Ultimate Whopper", "A whopper with double beef, double cheese and bacon", 12.0),
+                new Dish(R.drawable.hj_fried_chicken_classic, "Fried Chicken Classic Burger", "Fried chicken burger", 10.0)
+        });
+
+        addDishes(db, restaurantNames[2], new Dish[]{
+                new Dish(R.drawable.kfc_original_recipe, "Original Recipe Fried Chicken", "Our world famous fried chicken coated in 7 secret herbs and spices", 15.0),
+                new Dish(R.drawable.kfc_original_recipe_buger, "Original Recipe Fried Chicken Burger", "Our world famous fried chicken coated in 7 secret herbs and spices in a burger", 12.0),
+                new Dish(R.drawable.kfc_zinger_burger, "Zinger Burger", "Spicy fried chicken burger", 12.0),
+                new Dish(R.drawable.kfc_twister, "Twister Wrap", "Our world famous fried chicken in a wrap", 12.0),
+                new Dish(R.drawable.kfc_popcorn_chicken, "Popcorn Chicken", "small pieces of fried chicken", 10.0),
+                new Dish(R.drawable.kfc_potatogravy, "Potato and Gravy", "Smooth mash potato with rich gravy", 8.0)
+        });
+
+        addDishes(db, restaurantNames[3], new Dish[]{
+
+        });
+
+        addDishes(db, restaurantNames[4], new Dish[]{
+
+        });
+
+        addDishes(db, restaurantNames[5], new Dish[]{
+
+        });
+
+        addDishes(db, restaurantNames[6], new Dish[]{
+
+        });
+
+        addDishes(db, restaurantNames[7], new Dish[]{
+
+        });
+    }
+
+    private void addDishes(SQLiteDatabase db, String restaurantName, Dish[] dishes)
+    {
+        ContentValues cv = new ContentValues();
+
+        for(int i = 0; i < dishes.length; i++)
+        {
+            cv.put(MenuTable.Columns.ITEM, dishes[i].getName());
+            cv.put(MenuTable.Columns.REST, restaurantName);
+            cv.put(MenuTable.Columns.IMG, dishes[i].getDrawable());
+            cv.put(MenuTable.Columns.DESC, dishes[i].getDescription());
+            cv.put(MenuTable.Columns.PRICE, dishes[i].getPrice());
+
+            db.insertOrThrow(MenuTable.NAME, null, cv);
+            cv.clear();
+        }
+    }
 }

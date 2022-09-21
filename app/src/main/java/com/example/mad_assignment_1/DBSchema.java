@@ -13,7 +13,7 @@ public class DBSchema
 {
 
     /**
-     * User Table - Contains columns for a user's email and password
+     * User Table - contains columns for a user's email and password
      */
     public static class UserTable
     {
@@ -27,7 +27,7 @@ public class DBSchema
     
     /**
      * Order History Table - contains columns for Username (email), date & time,
-     *  item, and quantity ordered. Generally, items with an equal
+     * item, and quantity ordered. Generally, items with an equal
      */
     
     public static class OrderHistoryTable
@@ -42,6 +42,9 @@ public class DBSchema
         }
     }
 
+    /**
+     * Menu Table - contains columns for Item name, Restaurant, Image, Description, and price.
+     */
     public static class MenuTable
     {
         public static final String NAME = "menu";
@@ -55,6 +58,9 @@ public class DBSchema
         }
     }
 
+    /**
+     * Restaurant Table - contains columns for Restaurant Name and Logo Image
+     */
     public static class RestaurantTable
     {
         public static final String NAME = "restaurants";

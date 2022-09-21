@@ -8,9 +8,9 @@ public class RestaurantList {
         public static void getList(List<Restaurant> list) {
             Menu grilldMenu = new Menu();
             grilldMenu.addDish("chips", "snack sized hot chips", 5.0, R.drawable.grilld_chips_snack);
-            grilldMenu.addDish("Crispy bacon and cheese Burger", "Famous burger patty with cripsy bacon chedder cheese ", 15.0, R.drawable.grilld_crispybaconandcheese);
+            grilldMenu.addDish("Crispy bacon and cheese Burger", "Famous burger patty with crispy bacon chedder cheese ", 15.0, R.drawable.grilld_crispybaconandcheese);
             grilldMenu.addDish("Mighty Traditional Burger", "Our famous burger just MIGHTY", 18.0, R.drawable.grilld_mighty_trad);
-            grilldMenu.addDish("Mustard and pickle", "Our famous burger with lots of mustard and picles", 16.0, R.drawable.grilld_mustardandpickled);
+            grilldMenu.addDish("Mustard and pickle", "Our famous burger with lots of mustard and pickles", 16.0, R.drawable.grilld_mustardandpickled);
             grilldMenu.addDish("Traditional grilld", "A simple classic burger", 14.0, R.drawable.grilld_simply_grilld_traditional);
             grilldMenu.addDish("Summer sunset burger", "Buger with guac, grilled pineapple and aioli", 16.0, R.drawable.grilld_summersunset);
             grilldMenu.addDish("Sweet potato chips", "snack sized hot sweet potato chips", 6.0, R.drawable.grilld_sweetpotatochips);
@@ -25,21 +25,20 @@ public class RestaurantList {
             list.add(HungryJacks);
             Menu kfc = new Menu();
             kfc.addDish("Orginal Recipe fried chicken", "Our world famous fried chicken coated in 7 secret herbs and spices", 15.0, R.drawable.kfc_original_recipe);
-            kfc.addDish("Orginal Recipe fried chicken", "Our world famous fried chicken coated in 7 secret herbs and spices", 15.0, R.drawable.kfc_original_recipe);
             kfc.addDish("Orginal Recipe fried chicken burger", "Our world famous fried chicken coated in 7 secret herbs and spices in a burger", 15.0, R.drawable.kfc_original_recipe_buger);
             kfc.addDish("Popcorn chicken", "small peices of fried chicken ", 10.0, R.drawable.kfc_popcorn_chicken);
             kfc.addDish("Potato and gravy", "Smooth mash potato with rich gravy", 8.0, R.drawable.kfc_potatogravy);
-            kfc.addDish("Tister wrap", "Our world famous fried chicken in a wrap", 12.0, R.drawable.kfc_twister);
+            kfc.addDish("Twister wrap", "Our world famous fried chicken in a wrap", 12.0, R.drawable.kfc_twister);
             kfc.addDish("Zinger Burger", "Spicy fried chicken buger", 12.0, R.drawable.kfc_zinger_burger);
             Restaurant KFC = new Restaurant("KFC", R.drawable.kfc_logo, kfc);
             list.add(KFC);
             Menu mcdonaladsMenu = new Menu();
-            mcdonaladsMenu.addDish("Big Mac", "double beef buger with special sauce", 10.0, R.drawable.mcdonals_big_mac);
+            mcdonaladsMenu.addDish("Big Mac", "double beef burger with special sauce", 10.0, R.drawable.mcdonals_big_mac);
             mcdonaladsMenu.addDish("Four chicken nuggets", "Four chicken nuggets with you choice of sauce", 7.0, R.drawable.mcdonals_chicken_mcnuggets_4pc);
             mcdonaladsMenu.addDish("Double Cheese Burger", "double beef, double cheese with pickles", 7.50, R.drawable.mcdonals_double_cheeseburger);
             mcdonaladsMenu.addDish("Fries", "Medium Fries", 4.0, R.drawable.mcdonals_fries);
             mcdonaladsMenu.addDish("Hot fudge Sundae", "Soft serve ice cream with hot chocolate fudge sauce", 5.50, R.drawable.mcdonals_fudge_sundae);
-            mcdonaladsMenu.addDish("Mcfulurry", "Soft serve ice cream whipped with your choice of toppings", 4.0, R.drawable.mcdonals_mcflurry);
+            mcdonaladsMenu.addDish("Mcflurry", "Soft serve ice cream whipped with your choice of toppings", 4.0, R.drawable.mcdonals_mcflurry);
             mcdonaladsMenu.addDish("Quarter Ponder", "Grilled 1/4lb beef burger with sauce and pickles", 9.0, R.drawable.mcdonals_quarter_pounder);
             Restaurant mcdonalds = new Restaurant("Mcdonalds", R.drawable.mcdonalds_logo_1, mcdonaladsMenu);
             list.add(mcdonalds);
