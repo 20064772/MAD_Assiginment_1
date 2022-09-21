@@ -1,5 +1,6 @@
 package com.example.mad_assignment_1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -61,9 +62,11 @@ public class MenuFragment extends Fragment {
         MenuAdapter menuAdapter = new MenuAdapter(restaurant, basket, total);
         rv.setAdapter(menuAdapter);
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                //going to check out activity
+                Intent intent = new Intent(getActivity(), CheckOutActivity.class);
+                startActivity(intent);
             }
         });
         return v;
