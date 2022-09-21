@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +16,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     private Restaurant restaurant;
     private Menu menuList;
-    String name;
+    private String name;
+    private Basket checkOut;
+    private TextView total;
 
-    public MenuAdapter(Restaurant res) {
+    public MenuAdapter(Restaurant res, Basket basket, TextView total) {
         this.restaurant = res;
         menuList  = restaurant.getMenu();
-
+        this.checkOut = basket;
+        this.total = total;
     }
 
     @NonNull
@@ -38,6 +42,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.name.setText(menuList.getDish(position).getName());
         holder.description.setText(menuList.getDish(position).getDescription());
         holder.pic.setImageResource(menuList.getDish(position).getDrawable());
+        holder.price.setText("$" + String.valueOf(menuList.getDish(position).getPrice()));
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkOut.add(menuList.getDish(holder.getAbsoluteAdapterPosition()));
+                int x = checkOut.getCount(menuList.getDish(holder.getAbsoluteAdapterPosition()));
+                holder.count.setText(String.valueOf(x));
+                total.setText("$" + String.valueOf(checkOut.getTotal()));
+            }
+        });
+
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkOut.minus(menuList.getDish(holder.getAbsoluteAdapterPosition()));
+                int x = checkOut.getCount(menuList.getDish(holder.getAbsoluteAdapterPosition()));
+                holder.count.setText(String.valueOf(x));
+                total.setText("$" + String.valueOf(checkOut.getTotal()));
+            }
+        });
 
     }
 

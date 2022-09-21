@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class MenuFragment extends Fragment {
     List<Restaurant> restaurantList;
     String resName;
     Restaurant restaurant;
+    Basket basket;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -37,14 +40,11 @@ public class MenuFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(SharedViewModel.class);
         restaurantList = viewModel.getRestaurantList();
         resName = String.valueOf(viewModel.getViewModelName());
-
+        basket = new Basket();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-
 
         for (Restaurant i : restaurantList)
         {
@@ -54,10 +54,18 @@ public class MenuFragment extends Fragment {
             }
         }
         View v = inflater.inflate(R.layout.fragment_menu,container, false);
+        Button button = v.findViewById(R.id.checkout);
+        TextView total = v.findViewById(R.id.total);
         RecyclerView rv = v.findViewById(R.id.MenuRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        MenuAdapter menuAdapter = new MenuAdapter(restaurant);
+        MenuAdapter menuAdapter = new MenuAdapter(restaurant, basket, total);
         rv.setAdapter(menuAdapter);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //going to check out activity
+            }
+        });
         return v;
     }
 }

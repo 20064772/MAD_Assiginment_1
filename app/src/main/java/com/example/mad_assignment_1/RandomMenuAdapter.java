@@ -42,7 +42,7 @@ public class  RandomMenuAdapter extends RecyclerView.Adapter<RandomMenuViewHolde
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setNameMutableLiveData(restaurantList.get(holder.getAdapterPosition()).getName());
+                viewModel.setNameMutableLiveData(restaurantList.get(holder.getAbsoluteAdapterPosition()).getName());
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 MenuFragment menuFragment = new MenuFragment();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrag, menuFragment).addToBackStack(null).commit();
