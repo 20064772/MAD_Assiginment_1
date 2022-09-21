@@ -28,5 +28,8 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
         plus = itemView.findViewById(R.id.plus); //same
         minus = itemView.findViewById(R.id.minus); //same
 
+
+
+
     }
 }

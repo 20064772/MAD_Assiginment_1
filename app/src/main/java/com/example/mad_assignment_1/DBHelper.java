@@ -98,4 +98,9 @@ public class DBHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
 
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+
 }
