@@ -22,6 +22,10 @@ public class DBHelper extends SQLiteOpenHelper
     private static final int VERSION = 1;               //Database version
     private static final String DB_NAME = "Food.db";    //Database name
 
+    /**
+     *
+     * @param context   (Context)
+     */
     @RequiresApi(api = Build.VERSION_CODES.P)
     public DBHelper(Context context)
     {
@@ -31,15 +35,18 @@ public class DBHelper extends SQLiteOpenHelper
     /**
      * Creates the database schema
      *
-     * @param db (SQLiteDatabase) - The database object
+     * @param db    (SQLiteDatabase) - The database object
      */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        /* Turns on foreign key constraints */
+        /* Enables foreign key constraints */
         db.execSQL("PRAGMA foreign_keys = ON");
 
+        /* Creates the database schema */
         createTables(db);
+
+        /* Populates restaurant tables with default values */
         fillRestaurantTable(db);
         fillMenuTable(db);
     }
@@ -47,13 +54,18 @@ public class DBHelper extends SQLiteOpenHelper
     /**
      * Upgrades database schema
      *
-     * @param db (SQLiteDatabase) - The database object
-     * @param i (int) - Old version number
-     * @param i1 (int) - New version number
+     * @param db    (SQLiteDatabase) - The database object
+     * @param i     (int) - Old version number
+     * @param i1    (int) - New version number
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
 
+    /**
+     * Creates the tables representing the database schema
+     *
+     * @param db    (SQLiteDatabase) - The database object
+     */
     private void createTables(SQLiteDatabase db)
     {
         /* Creates User Table */
@@ -105,8 +117,14 @@ public class DBHelper extends SQLiteOpenHelper
         );
     }
 
+    /**
+     * Fills the restaurant table with the restaurant names
+     *
+     * @param db
+     */
     private void fillRestaurantTable(SQLiteDatabase db)
     {
+        /* Restaurant names */
         final String[] restaurantNames = {
                 "Grilld",
                 "Hungry Jack's",
@@ -118,6 +136,8 @@ public class DBHelper extends SQLiteOpenHelper
                 "Zambrero"
         };
 
+        /* Integer values representing restaurant logos - must be in the same
+            order as the restaurant names */
         final int[] restaurantImgs = {
                 R.drawable.grilld_logo,
                 R.drawable.hj_logo,
@@ -131,6 +151,8 @@ public class DBHelper extends SQLiteOpenHelper
 
         ContentValues cv = new ContentValues();
 
+        /* Iterates through the arrays, constructs the tuple and adds them to
+            the database */
         for (int i = 0; i < restaurantImgs.length; i++)
         {
             cv.put(RestaurantTable.Columns.REST, restaurantNames[i]);
@@ -140,7 +162,11 @@ public class DBHelper extends SQLiteOpenHelper
             cv.clear();
         }
     }
-
+    /**
+     * Fills the menu table with the item details
+     *
+     * @param db
+     */
     private void fillMenuTable(SQLiteDatabase db)
     {
         final String[] restaurantNames = {
@@ -154,6 +180,7 @@ public class DBHelper extends SQLiteOpenHelper
                 "Zambrero"
         };
 
+        /* Grilld */
         addDishes(db, restaurantNames[0], new Dish[]{
                 new Dish(R.drawable.grilld_chips_snack, "Chips", "Snack sized hot chips", 5.0),
                 new Dish(R.drawable.grilld_sweetpotatochips, "Sweet Potato Chips", "Snack sized hot sweet potato chips", 6.0),
@@ -164,6 +191,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.grilld_mighty_trad, "Mighty Traditional Burger", "Our famous burger just MIGHTY", 18.0)
         });
 
+        /* Hungry Jack's */
         addDishes(db, restaurantNames[1], new Dish[]{
                 new Dish(R.drawable.hj_double_cheeseburger, "Double Cheeseburger", "Flame grilled burger with double beef and double cheese", 10.0),
                 new Dish(R.drawable.hj_whopper, "Whopper", "Our famous flame grilled burger", 9.0),
@@ -172,6 +200,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.hj_fried_chicken_classic, "Fried Chicken Classic Burger", "Fried chicken burger", 10.0)
         });
 
+        /* KFC */
         addDishes(db, restaurantNames[2], new Dish[]{
                 new Dish(R.drawable.kfc_original_recipe, "Original Recipe Fried Chicken", "Our world famous fried chicken coated in 7 secret herbs and spices", 15.0),
                 new Dish(R.drawable.kfc_original_recipe_buger, "Original Recipe Fried Chicken Burger", "Our world famous fried chicken coated in 7 secret herbs and spices in a burger", 12.0),
@@ -181,6 +210,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.kfc_potatogravy, "Potato and Gravy", "Smooth mash potato with rich gravy", 8.0)
         });
 
+        /* McDonald's */
         addDishes(db, restaurantNames[3], new Dish[]{
                 new Dish(R.drawable.mcdonals_double_cheeseburger,"Double Cheeseburger", "Double beef, double cheese with pickles", 7.50),
                 new Dish(R.drawable.mcdonals_quarter_pounder, "Quarter Pounder", "Grilled 1/4lb beef burger with cheese, sauce and pickles", 9.0),
@@ -191,6 +221,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.mcdonals_mcflurry, "McFlurry", "Soft-serve ice cream with your choice of toppings", 4.0)
         });
 
+        /* Pizza Hut */
         addDishes(db, restaurantNames[4], new Dish[]{
                 new Dish(R.drawable.pizzahut_cheese_lovers_pizza, "Cheese Lovers", "Just cheese on a tomato base", 10.0),
                 new Dish(R.drawable.pizzahut_hawaiian_pizza, "Hawaiian", "Ham and pineapple on a tomato base", 11.50),
@@ -200,6 +231,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.pizzahut_super_supreme_pizza, "Super Supreme", "Everything on a tomato base", 13.0)
         });
 
+        /* Red Rooster */
         addDishes(db, restaurantNames[5], new Dish[]{
                 new Dish(R.drawable.red_chicken_wings, "Chicken Wings", "3 crispy fried chicken wings with BBQ sauce", 8.50),
                 new Dish(R.drawable.red_chicken_strip, "Chicken Strips", "3 Fried Chicken tender loins with your choice of sauce", 9.0),
@@ -208,6 +240,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.red_rippa, "Ripper Roll", "Fried tenderloins in a long roll with lettuce and mayo", 10.0)
         });
 
+        /* Subway */
         addDishes(db, restaurantNames[6], new Dish[]{
                 new Dish(R.drawable.subway_tuna_mayo, "Tuna & Mayo Sub", "12 inch sub with tuna pieces and mayo", 10.0),
                 new Dish(R.drawable.subway_blt, "BLT Sub", "12 inch sub with Bacon, lettuce and tomato", 12.0),
@@ -218,6 +251,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.subway_chocolatechipcookie, "Choc Chip Cookie", "Fresh chocolate chip cookie", 3.0)
         });
 
+        /* Zambrero */
         addDishes(db, restaurantNames[7], new Dish[]{
                 new Dish(R.drawable.zam_burrito, "Burrito", "Pulled pork, lettuce, corn, rice, beans and cheese in a tortilla", 15.0),
                 new Dish(R.drawable.zam_bowl, "Burrito Bowl", "Grilled chicken, lettuce, corn, rice, beans and cheese served in a bowl", 15.0),
