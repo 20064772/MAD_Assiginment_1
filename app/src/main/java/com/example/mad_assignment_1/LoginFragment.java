@@ -1,8 +1,11 @@
 package com.example.mad_assignment_1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +22,8 @@ import android.widget.Toast;
 public class LoginFragment extends Fragment {
 
 
-
+    private CheckoutViewModel viewModel;
+    private Basket basket;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -27,13 +31,15 @@ public class LoginFragment extends Fragment {
 
     public static LoginFragment newInstance(String param1, String param2) {
         LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        basket = (Basket)getArguments().getSerializable("basket");
+        viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(CheckoutViewModel.class);
+        viewModel.setBasket(basket);
     }
 
     @Override
@@ -47,22 +53,34 @@ public class LoginFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userEmail = email.getText().toString();
-                String userPass = password.getText().toString();
-                if(userEmail.isEmpty() || userPass.isEmpty()){
-                    Toast.makeText(getActivity(),"Incorrect UserName or Password",Toast.LENGTH_SHORT).show();
+                //String userEmail = email.getText().toString();
+               //String userPass = password.getText().toString();
+                Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //Kills previous activity after login. dont know how it will effect the DB.
+                startActivity(intent);
 
+
+               // getActivity().finish();
+               /**
+               if(? DB with userEmail and password == true){
+                    Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
+                    startActivity(intent);
                 }
-                /*else if (){
-
-                }*/
+                else (? db with userEmail != null || ? db with userPass != null){
+                    Toast.makeText(getActivity(),"Incorrect UserName or Password",Toast.LENGTH_SHORT).show();
+                    email.setText(null);
+                    password.setText(null);//this
+                }
+                **/
             }
         });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                RegisterFragment registerFragment = new RegisterFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.checkoutfrag, registerFragment).addToBackStack(null).commit();
             }
         });
 

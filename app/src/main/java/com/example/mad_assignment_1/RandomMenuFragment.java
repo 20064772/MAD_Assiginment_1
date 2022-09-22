@@ -35,8 +35,7 @@ public class RandomMenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        restaurantList = new ArrayList<Restaurant>();// might need to move to on create
-        RestaurantList.getList(restaurantList);// might need to move to on create
+        restaurantList = (List<Restaurant>)getArguments().getSerializable("list");
         viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(SharedViewModel.class);// might need to move to on create
         viewModel.setRestaurantList(restaurantList);
 

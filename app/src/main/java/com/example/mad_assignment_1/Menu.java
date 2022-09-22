@@ -1,8 +1,9 @@
 package com.example.mad_assignment_1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Menu {
+public class Menu implements Serializable {
 
     ArrayList<Dish> menu;
 

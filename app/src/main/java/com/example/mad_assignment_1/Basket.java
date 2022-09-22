@@ -1,9 +1,10 @@
 package com.example.mad_assignment_1;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Basket {
+public class Basket implements Serializable {
 
     private Map mapBasket;
     private BasketDish bd;

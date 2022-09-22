@@ -1,6 +1,8 @@
 package com.example.mad_assignment_1;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable{
 
     private String name;
     private String description;
