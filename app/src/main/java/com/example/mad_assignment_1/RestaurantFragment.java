@@ -3,6 +3,7 @@ package com.example.mad_assignment_1;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,14 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RestaurantFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
+
 public class RestaurantFragment extends Fragment {
 
     private SharedViewModel viewModel;
+    List<Restaurant> restaurantList;
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -31,8 +31,8 @@ public class RestaurantFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(SharedViewModel.class);
+        restaurantList = viewModel.getRestaurantList();
     }
 
     @Override
@@ -41,8 +41,8 @@ public class RestaurantFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_restaurant,container, false);
         RecyclerView rv = v.findViewById(R.id.RestaurantRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        RestaurantAdapter menuAdapter = new RestaurantAdapter();//maybe like this
-        rv.setAdapter(menuAdapter);
+        RestaurantAdapter restaurantAdapter = new RestaurantAdapter(restaurantList, viewModel);//maybe like this
+        rv.setAdapter(restaurantAdapter);
         return v;
     }
 }
