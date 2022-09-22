@@ -1,6 +1,8 @@
 package com.example.mad_assignment_1;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable {
 
     private String name;
     private int drawable;

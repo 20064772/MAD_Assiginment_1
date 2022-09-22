@@ -41,8 +41,8 @@ public class RestaurantFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_restaurant,container, false);
         RecyclerView rv = v.findViewById(R.id.RestaurantRecyclerView);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        RestaurantAdapter menuAdapter = new RestaurantAdapter(restaurantList, viewModel);//maybe like this
-        rv.setAdapter(menuAdapter);
+        RestaurantAdapter restaurantAdapter = new RestaurantAdapter(restaurantList, viewModel);//maybe like this
+        rv.setAdapter(restaurantAdapter);
         return v;
     }
 }

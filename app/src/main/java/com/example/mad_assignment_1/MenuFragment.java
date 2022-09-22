@@ -8,12 +8,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -65,8 +68,14 @@ public class MenuFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CheckOutActivity.class);
-                startActivity(intent);
+                if(basket.getTotal() == 0){
+                    Toast.makeText(getActivity(),"You cannot check out with a empty basket", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), CheckOutActivity.class);
+                    intent.putExtra("basket", (Serializable) basket);
+                    startActivity(intent);
+                }
             }
         });
         return v;

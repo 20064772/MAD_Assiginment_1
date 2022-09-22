@@ -1,8 +1,9 @@
 package com.example.mad_assignment_1;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class BasketDish {
+public class BasketDish implements Serializable {
 
     private int count;
     Dish dish;
