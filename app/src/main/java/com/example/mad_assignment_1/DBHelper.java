@@ -182,23 +182,49 @@ public class DBHelper extends SQLiteOpenHelper
         });
 
         addDishes(db, restaurantNames[3], new Dish[]{
-
+                new Dish(R.drawable.mcdonals_double_cheeseburger,"Double Cheeseburger", "Double beef, double cheese with pickles", 7.50),
+                new Dish(R.drawable.mcdonals_quarter_pounder, "Quarter Pounder", "Grilled 1/4lb beef burger with cheese, sauce and pickles", 9.0),
+                new Dish(R.drawable.mcdonals_big_mac, "Big Mac", "Double beef burger with special sauce", 10.0),
+                new Dish(R.drawable.mcdonals_chicken_mcnuggets_4pc, "4x Chicken Nuggets", "Four chicken nuggets with your choice of sauce", 7.0),
+                new Dish(R.drawable.mcdonals_fries, "Medium Fries", "Medium Fries", 4.0),
+                new Dish(R.drawable.mcdonals_fudge_sundae, "Hot Fudge Sundae", "Soft serve ice cream with hot chocolate fudge sauce", 5.50),
+                new Dish(R.drawable.mcdonals_mcflurry, "McFlurry", "Soft-serve ice cream with your choice of toppings", 4.0)
         });
 
         addDishes(db, restaurantNames[4], new Dish[]{
-
+                new Dish(R.drawable.pizzahut_cheese_lovers_pizza, "Cheese Lovers", "Just cheese on a tomato base", 10.0),
+                new Dish(R.drawable.pizzahut_hawaiian_pizza, "Hawaiian", "Ham and pineapple on a tomato base", 11.50),
+                new Dish(R.drawable.pizzahut_pepperoni_pizza, "Pepperoni", "Pepperoni with cheese on a tomato base", 11.0),
+                new Dish(R.drawable.pizzahut_bbq_meatlovers_pizza, "BBQ Meat Lovers", "All the meat with a BBQ sauce base", 13.0),
+                new Dish(R.drawable.pizzahut_chicken_supreme_pizza, "Chicken Supreme", "Chicken and all the veggies on a tomato base", 12.0),
+                new Dish(R.drawable.pizzahut_super_supreme_pizza, "Super Supreme", "Everything on a tomato base", 13.0)
         });
 
         addDishes(db, restaurantNames[5], new Dish[]{
-
+                new Dish(R.drawable.red_chicken_wings, "Chicken Wings", "3 crispy fried chicken wings with BBQ sauce", 8.50),
+                new Dish(R.drawable.red_chicken_strip, "Chicken Strips", "3 Fried Chicken tender loins with your choice of sauce", 9.0),
+                new Dish(R.drawable.red_bbq_chicken, "Whole BBQ Chicken", "A whole BBQ chicken coated in herbs and spices", 15.0),
+                new Dish(R.drawable.red_chicken_roll, "Chicken Roll", "Hot shredded BBQ chicken in a long roll with mayo", 8.0),
+                new Dish(R.drawable.red_rippa, "Ripper Roll", "Fried tenderloins in a long roll with lettuce and mayo", 10.0)
         });
 
         addDishes(db, restaurantNames[6], new Dish[]{
-
+                new Dish(R.drawable.subway_tuna_mayo, "Tuna & Mayo Sub", "12 inch sub with tuna pieces and mayo", 10.0),
+                new Dish(R.drawable.subway_blt, "BLT Sub", "12 inch sub with Bacon, lettuce and tomato", 12.0),
+                new Dish(R.drawable.subway_chicken_teriyak, "Chicken Teriyaki Sub", "12 inch sub with teriyaki chicken", 13.0),
+                new Dish(R.drawable.subway_meatball_sub, "Meatball Sub", "12 inch sub with meatballs and red sauce", 13.20),
+                new Dish(R.drawable.subway_steak_melt, "Steak Melt sub", "12 inch sub with steak strips and melted cheese", 14.0),
+                new Dish(R.drawable.subway_whitechipmacadamianutcookie, "White Chocolate Macadamia Cookie", "Fresh cookie with white chocolate pieces and macadamia nuts", 3.0),
+                new Dish(R.drawable.subway_chocolatechipcookie, "Choc Chip Cookie", "Fresh chocolate chip cookie", 3.0)
         });
 
         addDishes(db, restaurantNames[7], new Dish[]{
-
+                new Dish(R.drawable.zam_burrito, "Burrito", "Pulled pork, lettuce, corn, rice, beans and cheese in a tortilla", 15.0),
+                new Dish(R.drawable.zam_bowl, "Burrito Bowl", "Grilled chicken, lettuce, corn, rice, beans and cheese served in a bowl", 15.0),
+                new Dish(R.drawable.zam_dos_capas, "Dos Capas", "Grilled chicken, lettuce, corn, rice, beans and cheese in a hard taco wrapped in a tortilla", 9.0),
+                new Dish(R.drawable.zam_quesadillas, "Quesadilla", "Grilled chicken, lettuce, corn, rice, beans and cheese between a toasted flour tortilla", 12.0),
+                new Dish(R.drawable.zam_nachos, "Nachos", "Pulled beef, salsa, cheese, guacamole and sour cream over corn chips ", 12.0),
+                new Dish(R.drawable.zam_chips, "Chips", "Medium hot chips with Mexican seasoning", 5.0)
         });
     }
 

@@ -36,7 +36,7 @@ public class RestaurantList {
             mcdonaladsMenu.addDish("Big Mac", "double beef burger with special sauce", 10.0, R.drawable.mcdonals_big_mac);
             mcdonaladsMenu.addDish("Four chicken nuggets", "Four chicken nuggets with you choice of sauce", 7.0, R.drawable.mcdonals_chicken_mcnuggets_4pc);
             mcdonaladsMenu.addDish("Double Cheese Burger", "double beef, double cheese with pickles", 7.50, R.drawable.mcdonals_double_cheeseburger);
-            mcdonaladsMenu.addDish("Fries", "Medium Fries", 4.0, R.drawable.mcdonals_fries);
+            mcdonaladsMenu.addDish("Medium Fries", "Medium Fries", 4.0, R.drawable.mcdonals_fries);
             mcdonaladsMenu.addDish("Hot fudge Sundae", "Soft serve ice cream with hot chocolate fudge sauce", 5.50, R.drawable.mcdonals_fudge_sundae);
             mcdonaladsMenu.addDish("Mcflurry", "Soft serve ice cream whipped with your choice of toppings", 4.0, R.drawable.mcdonals_mcflurry);
             mcdonaladsMenu.addDish("Quarter Ponder", "Grilled 1/4lb beef burger with sauce and pickles", 9.0, R.drawable.mcdonals_quarter_pounder);
@@ -71,7 +71,7 @@ public class RestaurantList {
             list.add(subway);
             Menu zamMenu = new Menu();
             zamMenu.addDish("Burrito bowl", "Grilled chicken, lettuce, corn, rice, beans and cheese served in a bowl", 15.0, R.drawable.zam_bowl);
-            zamMenu.addDish("Burrito", "PUlled pork, lettuce, corn, rice, beans and cheese in a tortilla", 15.0, R.drawable.zam_burrito);
+            zamMenu.addDish("Burrito", "Pulled pork, lettuce, corn, rice, beans and cheese in a tortilla", 15.0, R.drawable.zam_burrito);
             zamMenu.addDish("Chips", "Medium hot chips with mexican seasoning", 5.0, R.drawable.zam_chips);
             zamMenu.addDish("Dos capas", "Grilled chicken, lettuce, corn, rice, beans and cheese in a hard taco shell wrapped in a tortilla", 11.0, R.drawable.zam_dos_capas);
             zamMenu.addDish("Nachos", "Puled beef, salsa, cheese, guac and sour cream over corn chips ", 15.0, R.drawable.zam_nachos);
