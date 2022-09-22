@@ -9,7 +9,8 @@ import com.example.mad_assignment_1.DBSchema.*;
 import androidx.annotation.RequiresApi;
 
 /**
- * Database Helper Class - Facilitates database creation and manipulation
+ * Database Helper Class - Facilitates database creation, upgrading and
+ *  preloading with restaurant and menu information
  *
  * @class           DBHelper
  * @inherits        android.database.sqlite.SQLiteOpenHelper
@@ -23,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper
     private static final String DB_NAME = "Food.db";    //Database name
 
     /**
+     * Single constructor for the Database Helper Class
      *
      * @param context   (Context)
      */
@@ -40,6 +42,8 @@ public class DBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
+        /* TODO: Change this. This is the incorrect way to do it. It must also
+            be executed on every database opening rather than just creation */
         /* Enables foreign key constraints */
         db.execSQL("PRAGMA foreign_keys = ON");
 
@@ -117,6 +121,7 @@ public class DBHelper extends SQLiteOpenHelper
         );
     }
 
+    //TODO: Possibly move these to model class(es)?
     /**
      * Fills the restaurant table with the restaurant names
      *
@@ -151,7 +156,7 @@ public class DBHelper extends SQLiteOpenHelper
 
         ContentValues cv = new ContentValues();
 
-        /* Iterates through the arrays, constructs the tuple and adds them to
+        /* Iterates through the arrays, constructs each tuple and adds them to
             the database */
         for (int i = 0; i < restaurantImgs.length; i++)
         {
@@ -266,6 +271,8 @@ public class DBHelper extends SQLiteOpenHelper
     {
         ContentValues cv = new ContentValues();
 
+        /* Iterates through the array of dishes, constructs each tuple and adds
+            them to the database */
         for(int i = 0; i < dishes.length; i++)
         {
             cv.put(MenuTable.Columns.ITEM, dishes[i].getName());
@@ -274,6 +281,10 @@ public class DBHelper extends SQLiteOpenHelper
             cv.put(MenuTable.Columns.DESC, dishes[i].getDescription());
             cv.put(MenuTable.Columns.PRICE, dishes[i].getPrice());
 
+            /* Throws an exception if there is an SQL error - not using
+                try-catch as these values are "hard-coded" and therefore an
+                exception should not be thrown unless there is a mistake in
+                programming */
             db.insertOrThrow(MenuTable.NAME, null, cv);
             cv.clear();
         }
