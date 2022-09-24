@@ -1,3 +1,12 @@
+/**
+ * View holder for the Resturant recyclerview
+ *
+ * @class           RestaurantViewHolder
+ * @extends         RecyclerView.ViewHolder
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import android.view.View;

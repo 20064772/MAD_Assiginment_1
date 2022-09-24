@@ -1,3 +1,12 @@
+/**
+ * Register Fragment. Allows users to enter details to register for an account
+ *
+ * @class           RegisterFragment
+ * @extends         Fragment
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import android.content.Intent;
