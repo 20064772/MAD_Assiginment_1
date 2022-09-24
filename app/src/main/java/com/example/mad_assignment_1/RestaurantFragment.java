@@ -1,3 +1,12 @@
+/**
+ * Restaurant Fragment. holds the recycler view for the restaurants.
+ *
+ * @class           RestaurantFragment
+ * @extends         Fragment
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import android.os.Bundle;

@@ -1,3 +1,13 @@
+/**
+ * MenuRandomFragment. A fragment that holds the recycler view that displays the RandomMenuVenu.
+ *
+ * @class           RandomMenufragment
+ * @extends         Fragment
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
+
 package com.example.mad_assignment_1;
 
 import android.os.Bundle;

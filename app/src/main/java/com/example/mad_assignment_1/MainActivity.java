@@ -1,3 +1,12 @@
+/**
+ * MainActivty.
+ *
+ * @class           MainActivity
+ * @extends         AppCompatActivity
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         if (rmf == null)
         {
             Bundle b = new Bundle();
-            b.putSerializable("list", (Serializable) restaurantList);
+            b.putSerializable("list", (Serializable) restaurantList);// Stores restaurantList in a bundle to pass to the random menu fragment.
 
             rmf = new RandomMenuFragment();
             rmf.setArguments(b);

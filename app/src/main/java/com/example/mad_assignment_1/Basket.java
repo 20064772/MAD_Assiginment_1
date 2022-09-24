@@ -1,3 +1,13 @@
+/**
+ * Bsket. A object that hold the held the didhes that are add to be "checked out"
+ *  has constructor, getters and settors.
+ *
+ * @class           Basket
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
+
 package com.example.mad_assignment_1;
 
 import java.io.Serializable;

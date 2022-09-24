@@ -1,3 +1,12 @@
+/**
+ * RandomMenuAdaptor. adapter for the Rnamdom menu rcycler view
+ *
+ * @class           RandomMenuAdaptor
+ * @extends         RecyclerView.Adapter
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import android.view.LayoutInflater;

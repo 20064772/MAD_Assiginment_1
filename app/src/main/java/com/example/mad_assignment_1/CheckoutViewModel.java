@@ -1,10 +1,14 @@
+/**
+ * CheckoutViewModel. This View model holds the basket so it may be shared between the register franment and the login fragment.
+ *
+ * @class           CheckOutViewModel
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import androidx.lifecycle.ViewModel;
-
-/**
- * This class allows the basket to be shared between the LoginFragment and the Registerfragment
- */
 
 public class CheckoutViewModel extends ViewModel {
 

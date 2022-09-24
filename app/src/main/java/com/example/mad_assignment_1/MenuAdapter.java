@@ -1,3 +1,13 @@
+/**
+ *  Fragment adapter for the menu fragment. this holds the recycler view
+ *
+ * @class           MenuAdapter
+ * @extends         RecyclerView.Adapter
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
+
 package com.example.mad_assignment_1;
 
 import android.content.Context;
@@ -20,6 +30,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     private Basket checkOut;
     private TextView total;
 
+
+    //construtor
     public MenuAdapter(Restaurant res, Basket basket, TextView total) {
         this.restaurant = res;
         menuList  = restaurant.getMenu();
@@ -27,6 +39,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         this.total = total;
     }
 
+
+    //On create. inflates the view held int the recyclerView
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,6 +50,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         return myViewHolder;
     }
 
+
+    //on bond view holder. binds the elements of the views held in the recycler view.
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
 
@@ -45,7 +61,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.price.setText("$" + String.valueOf(menuList.getDish(position).getPrice()));
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //adds a dish to the basket and increments the count.
                 checkOut.add(menuList.getDish(holder.getAbsoluteAdapterPosition()));
                 int x = checkOut.getCount(menuList.getDish(holder.getAbsoluteAdapterPosition()));
                 holder.count.setText(String.valueOf(x));
@@ -53,7 +69,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
             }
         });
 
-        holder.minus.setOnClickListener(new View.OnClickListener() {
+        holder.minus.setOnClickListener(new View.OnClickListener() { //removes a dish from the basket and decrments the count.
             @Override
             public void onClick(View view) {
                 checkOut.minus(menuList.getDish(holder.getAbsoluteAdapterPosition()));
@@ -66,7 +82,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount() { // returns the number of items in the menu
         return menuList.getSize();
     }
 }

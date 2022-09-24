@@ -1,21 +1,26 @@
+/**
+ * MenuFragment. A fragment that holds the recycler view that displays the resturant menu.
+ *
+ * @class           Menufragment
+ * @extends         Fragment
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -39,7 +44,7 @@ public class MenuFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) { //sets the data used in the view
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(SharedViewModel.class);
         restaurantList = viewModel.getRestaurantList();
@@ -67,7 +72,7 @@ public class MenuFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {// button that changes activity to checkout activity
                 if(basket.getTotal() == 0){
                     Toast.makeText(getActivity(),"You cannot check out with a empty basket", Toast.LENGTH_SHORT).show();
                 }

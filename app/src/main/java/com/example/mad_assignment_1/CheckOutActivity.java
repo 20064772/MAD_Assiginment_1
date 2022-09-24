@@ -1,3 +1,12 @@
+/**
+ * Checkout activity. holds fragments used to login or register.
+ *
+ * @class           CheckOutActivity
+ * @extends         AppCompatActivity
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +29,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         if (loginFragment == null){
             Bundle b = new Bundle();
-            b.putSerializable("basket", (Serializable) basket);
+            b.putSerializable("basket", (Serializable) basket);// places the basket in a bundle so it can be added the the DB once user is logged in/registered
             loginFragment = new LoginFragment();
             loginFragment.setArguments(b);
             fm.beginTransaction().add(R.id.checkoutfrag,loginFragment).commit();

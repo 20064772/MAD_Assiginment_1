@@ -1,3 +1,13 @@
+/**
+ * Menu. Object the stores Dish information for the restaurant object
+ * has Constructor, getter and setters.
+ *
+ * @class           Menu
+ * @Implements      Serializable
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import java.io.Serializable;

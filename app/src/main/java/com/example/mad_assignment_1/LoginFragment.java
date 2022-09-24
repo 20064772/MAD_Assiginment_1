@@ -1,3 +1,12 @@
+/**
+ * Login Fragment. A fragment where a user can input login and password or change fragment to the register fragment.
+ *
+ * @class           Login fragment
+ * @extends         Fragment
+ * @author          Ryan Mckenney
+ * @date_created    20/09/2022
+ */
+
 package com.example.mad_assignment_1;
 
 import android.content.Intent;
@@ -14,11 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class LoginFragment extends Fragment {
 
 
@@ -38,12 +43,12 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         basket = (Basket)getArguments().getSerializable("basket");
-        viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(CheckoutViewModel.class);
-        viewModel.setBasket(basket);
+        viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(CheckoutViewModel.class); // calls and constructs the view model so data my be stored
+        viewModel.setBasket(basket);// enter the basket to the view model so it can be access by the register fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { //binds the elements so the user may enter details
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         EditText email = (EditText) v.findViewById(R.id.email);
         EditText password = (EditText) v.findViewById(R.id.password);
@@ -52,7 +57,7 @@ public class LoginFragment extends Fragment {
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { // query the Db to check login details. If correct add basket details to DB, else, error and notify user.
                 //String userEmail = email.getText().toString();
                //String userPass = password.getText().toString();
                 Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
@@ -75,7 +80,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {// button that switches the fragment the the register fragment.
             @Override
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
