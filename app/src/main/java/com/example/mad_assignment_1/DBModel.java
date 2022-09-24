@@ -2,7 +2,6 @@ package com.example.mad_assignment_1;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
@@ -20,12 +19,19 @@ import java.security.NoSuchAlgorithmException;
  * @class           DBModel
  * @author          Tristan S. Tutungis
  * @date_created    22/09/2022
- * @last_modified   22/09/2022
+ * @last_modified   24/09/2022 22:02
  */
 public class DBModel
 {
-    private SQLiteDatabase db;
-
+    private SQLiteDatabase db; //The database
+    
+    /**
+     * Creates a new object containing a writeable database
+     *
+     * @param context   (Context)
+     */
+     
+     
     @RequiresApi(api = Build.VERSION_CODES.P)
     public DBModel(Context context)
     {
@@ -41,16 +47,25 @@ public class DBModel
      */
     public void addUser(String email, String passwd) throws IllegalArgumentException
     {
-        /* TODO: Method call to check if the email exists goes HERE */
-
-        ContentValues cv = new ContentValues();
-
-        cv.put(UserTable.Columns.EMAIL, email);
-        cv.put(UserTable.Columns.PASS, hashPasswd(passwd));
-
-        db.insert(UserTable.NAME, null, cv);
+        
+        if(!findUser(email, passwd))
+        {
+            ContentValues cv = new ContentValues();
+    
+            cv.put(UserTable.Columns.EMAIL, email);
+            cv.put(UserTable.Columns.PASS, hashPasswd(passwd));
+    
+            db.insert(UserTable.NAME, null, cv);
+        } else throw new IllegalArgumentException("User already exists");
     }
-
+    
+    /**
+     * Finds whether a user with a given email exists
+     *
+     * @param email     (String) Email address of user to be added
+     * @param passwd    (String) Plain-text password of the user to be added
+     * @return          (boolean) true if the user exists, false otherwise
+     */
     public boolean findUser(String email, String passwd)
     {
         UserCursor cursor = new UserCursor(db.query(UserTable.NAME, null,
@@ -66,7 +81,7 @@ public class DBModel
      * @param passwd    (String) The clear text password to be hashed
      * @return          (String) The hashed password
      */
-    private String hashPasswd(String passwd) //throws NoSuchAlgorithmException
+    private String hashPasswd(String passwd)
     {
         String hashedPasswd = null;
         try
@@ -74,7 +89,7 @@ public class DBModel
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             hashedPasswd = new String(md.digest(passwd.getBytes(StandardCharsets.UTF_8)));
         }
-        catch (NoSuchAlgorithmException e) {};
+        catch (NoSuchAlgorithmException e) {}
         return hashedPasswd;
     }
 }
