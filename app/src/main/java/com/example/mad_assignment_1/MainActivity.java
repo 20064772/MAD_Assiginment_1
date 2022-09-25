@@ -26,12 +26,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /**
-         * call method to populate database. Im not sure how you have done it.
-         */
 
-        List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-        RestaurantList.getList(restaurantList); /** this well need to be replaced with a method call to populate the List with the restaurants for the database*/
+        DBModel db = new DBModel(getApplicationContext());
+        ArrayList<Restaurant> restaurantList = db.getRestaurants();
+
         setContentView(R.layout.activity_main);
         FragmentManager fm = getSupportFragmentManager();
         RandomMenuFragment rmf = (RandomMenuFragment) fm.findFragmentById(R.id.rmrl);
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         if (rmf == null)
         {
             Bundle b = new Bundle();
-            b.putSerializable("list", (Serializable) restaurantList);// Stores restaurantList in a bundle to pass to the random menu fragment.
+            b.putSerializable("list", /*(Serializable)*/ restaurantList);// Stores restaurantList in a bundle to pass to the random menu fragment.
 
             rmf = new RandomMenuFragment();
             rmf.setArguments(b);

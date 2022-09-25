@@ -4,9 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 import com.example.mad_assignment_1.DBSchema.*;
-import androidx.annotation.RequiresApi;
 
 /**
  * Database Helper Class - Facilitates database creation, upgrading and
@@ -16,7 +14,7 @@ import androidx.annotation.RequiresApi;
  * @inherits        android.database.sqlite.SQLiteOpenHelper
  * @author          Tristan S. Tutungis
  * @date_created    15/09/2022
- * @last_modified   16/09/2022 22:10
+ * @last_modified   25/09/2022 17:33
  */
 public class DBHelper extends SQLiteOpenHelper
 {
@@ -28,10 +26,21 @@ public class DBHelper extends SQLiteOpenHelper
      *
      * @param context   (Context)
      */
-    @RequiresApi(api = Build.VERSION_CODES.P)
     public DBHelper(Context context)
     {
         super(context, DB_NAME, VERSION, null);
+    }
+
+    /**
+     * Configures the database connection - enables foreign-key support
+     *
+     * @param db    (SQLiteDatabase) - The database object
+     */
+    @Override
+    public void onConfigure(SQLiteDatabase db)
+    {
+        /* Enables foreign key constraints */
+        db.setForeignKeyConstraintsEnabled(true);
     }
 
     /**
@@ -42,11 +51,6 @@ public class DBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        /* TODO: Change this. This is the incorrect way to do it. It must also
-            be executed on every database opening rather than just creation */
-        /* Enables foreign key constraints */
-        db.execSQL("PRAGMA foreign_keys = ON");
-
         /* Creates the database schema */
         createTables(db);
 
@@ -121,7 +125,6 @@ public class DBHelper extends SQLiteOpenHelper
         );
     }
 
-    //TODO: Possibly move these to model class(es)?
     /**
      * Fills the restaurant table with the restaurant names
      *

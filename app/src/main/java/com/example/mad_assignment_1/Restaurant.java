@@ -17,6 +17,12 @@ public class Restaurant implements Serializable {
     private int drawable;
     private Menu menu;
 
+    public Restaurant(String name, int drawable)
+    {
+        this.name = name;
+        this.drawable = drawable;
+        this.menu = null;
+    }
 
     public Restaurant(String name, int drawable, Menu menu){
         this.name = name;
@@ -34,5 +40,10 @@ public class Restaurant implements Serializable {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    protected void setMenu(Menu menu)
+    {
+        this.menu = menu;
     }
 }

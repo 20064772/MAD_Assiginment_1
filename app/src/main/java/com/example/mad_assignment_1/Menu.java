@@ -26,6 +26,11 @@ public class Menu implements Serializable {
         menu.add(dish);
     }
 
+    public void addDish(Dish dish)
+    {
+        menu.add(dish);
+    }
+
     public ArrayList<Dish> getMenu(){
         return menu;
     }

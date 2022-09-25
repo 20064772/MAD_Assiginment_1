@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class DBModel
 {
-    private SQLiteDatabase db; //The database
+    private final SQLiteDatabase db; //The database
     
     /**
      * Creates a new object containing a writeable database
@@ -34,10 +34,10 @@ public class DBModel
      */
      
      
-    @RequiresApi(api = Build.VERSION_CODES.P)
+    //@RequiresApi(api = Build.VERSION_CODES.P)
     public DBModel(Context context)
     {
-        this.db = new DBHelper(context.getApplicationContext()).getWritableDatabase();
+        this.db = new DBHelper(context).getWritableDatabase();
     }
 
     /**
@@ -77,19 +77,68 @@ public class DBModel
         
         try
         {
-            if (cursor.getCount() == 0) userExists = false;
-            else userExists = true;
+            userExists = cursor.getCount() != 0;
         }
         finally { cursor.close(); }
         
         return userExists;
     }
-    
-    public List<Restaurant> getRestaurants()
+
+    /**
+     * Gets a list of the restaurants from the DB
+     *
+     * @return restaurantList   (List<Restaurant>)
+     */
+    public ArrayList<Restaurant> getRestaurants()
     {
-        List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-        
-        
+        ArrayList<Restaurant> restaurantList = new ArrayList<>();
+        String restaurantName;
+        RestaurantCursor restCursor = new RestaurantCursor(
+                db.query(RestaurantTable.NAME, null, null, null, null, null, null));
+
+        try
+        {
+            restCursor.moveToFirst();
+            while(!restCursor.isAfterLast())
+            {
+                restaurantName = restCursor.getName();
+
+                restaurantList.add(new Restaurant(restaurantName, restCursor.getDrawable(), getMenu(restaurantName)));
+            }
+        }
+        finally{ restCursor.close(); }
+
+        return restaurantList;
+    }
+
+    /**
+     * Retrieves a menu for a given restaurant from the DB
+     *
+     * @param menuName  (String) Name of the restaurant
+     * @return menu     (Menu) The menu associated with that restaurant
+     */
+    private Menu getMenu(String menuName)
+    {
+        MenuCursor menuCursor = new MenuCursor(db.query(MenuTable.NAME, null, MenuTable.Columns.REST + " = ?",
+                new String[]{menuName}, null, null, null));
+        Menu menu = new Menu();
+
+        try
+        {
+            menuCursor.moveToFirst();
+
+            while(!menuCursor.isAfterLast())
+            {
+                menu.addDish(menuCursor.getDish());
+                menuCursor.moveToNext();
+            }
+        }
+        finally
+        {
+            menuCursor.close();
+        }
+
+        return menu;
     }
     
     /**
