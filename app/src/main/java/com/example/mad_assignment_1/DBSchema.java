@@ -36,7 +36,7 @@ public class DBSchema
         public static class Columns
         {
             public static final String USER = "user";
-            public static final String DATETIME = "date & time";
+            public static final String DATETIME = "datetime";
             public static final String ITEM = MenuTable.Columns.ITEM;
             public static final String QTY = "quantity";
         }

@@ -43,6 +43,7 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         basket = (Basket)getArguments().getSerializable("basket");
+
         viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(CheckoutViewModel.class); // calls and constructs the view model so data my be stored
         viewModel.setBasket(basket);// enter the basket to the view model so it can be access by the register fragment
     }
@@ -55,28 +56,28 @@ public class LoginFragment extends Fragment {
         Button login = (Button) v.findViewById(R.id.login);
         Button register = (Button) v.findViewById(R.id.register);
 
+        DBModel db = new DBModel(getContext());
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // query the Db to check login details. If correct add basket details to DB, else, error and notify user.
-                //String userEmail = email.getText().toString();
-               //String userPass = password.getText().toString();
-                Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK); //Kills previous activity after login. dont know how it will effect the DB.
-                startActivity(intent);
+                String userEmail = email.getText().toString();
+                String userPass = password.getText().toString();
 
-
-               // getActivity().finish();
-               /**
-               if(? DB with userEmail and password == true){
+                if(db.findUser(userEmail, userPass))
+                {
+                    db.addToOrderHistory(basket, userEmail);
+                    db.close();
                     Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
                     startActivity(intent);
                 }
-                else (? db with userEmail != null || ? db with userPass != null){
-                    Toast.makeText(getActivity(),"Incorrect UserName or Password",Toast.LENGTH_SHORT).show();
-                    email.setText(null);
-                    password.setText(null);//this
-                }
-                **/
+                else
+                {
+                    Toast.makeText(getActivity(), "Incorrect UserName or Password", Toast.LENGTH_SHORT).show();
+                    email.setText("");
+                    password.setText("");
+               }
+
             }
         });
 

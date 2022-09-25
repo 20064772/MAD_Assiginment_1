@@ -38,5 +38,5 @@ public class Dish implements Serializable{
         return name;
     }
 
-    public double getPrice() {return price;}
+    public double getPrice() { return price; }
 }

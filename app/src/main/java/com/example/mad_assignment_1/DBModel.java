@@ -12,6 +12,7 @@ import com.example.mad_assignment_1.DBSchema.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +33,17 @@ public class DBModel
      *
      * @param context   (Context)
      */
-     
-     
-    //@RequiresApi(api = Build.VERSION_CODES.P)
     public DBModel(Context context)
     {
         this.db = new DBHelper(context).getWritableDatabase();
+    }
+
+    /**
+     * Closes the SQLiteDatabase connection
+     */
+    public void close()
+    {
+        this.db.close();
     }
 
     /**
@@ -74,7 +80,7 @@ public class DBModel
         UserCursor cursor = new UserCursor(db.query(UserTable.NAME, null,
                 UserTable.Columns.EMAIL + " = ? AND " + UserTable.Columns.PASS + " = ?",
                 new String[]{email, hashPasswd(passwd)}, null, null, "1"));
-        
+
         try
         {
             userExists = cursor.getCount() != 0;
@@ -104,6 +110,7 @@ public class DBModel
                 restaurantName = restCursor.getName();
 
                 restaurantList.add(new Restaurant(restaurantName, restCursor.getDrawable(), getMenu(restaurantName)));
+                restCursor.moveToNext();
             }
         }
         finally{ restCursor.close(); }
@@ -111,6 +118,30 @@ public class DBModel
         return restaurantList;
     }
 
+    public void addToOrderHistory(Basket basket, String user)
+    {
+        ContentValues cv = new ContentValues();
+        LocalDateTime now = LocalDateTime.now();
+        for (Object bdObj : basket.getMapBasket().values())
+        {
+            if(bdObj instanceof BasketDish) {
+                BasketDish bd = (BasketDish)bdObj;
+
+                cv.put(OrderHistoryTable.Columns.USER, user);
+                cv.put(OrderHistoryTable.Columns.DATETIME, now.toString());
+                cv.put(OrderHistoryTable.Columns.ITEM, bd.getDishName());
+                cv.put(OrderHistoryTable.Columns.QTY, bd.getCount());
+
+                db.insert(OrderHistoryTable.NAME, null, cv);
+                cv.clear();
+            } else throw new IllegalArgumentException();
+        }
+    }
+
+    public ArrayList<Order> getOrders()
+    {
+        return null;
+    }
     /**
      * Retrieves a menu for a given restaurant from the DB
      *

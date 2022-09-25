@@ -29,7 +29,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
         if (loginFragment == null){
             Bundle b = new Bundle();
-            b.putSerializable("basket", (Serializable) basket);// places the basket in a bundle so it can be added the the DB once user is logged in/registered
+            b.putSerializable("basket", basket);// places the basket in a bundle so it can be added the the DB once user is logged in/registered
             loginFragment = new LoginFragment();
             loginFragment.setArguments(b);
             fm.beginTransaction().add(R.id.checkoutfrag,loginFragment).commit();

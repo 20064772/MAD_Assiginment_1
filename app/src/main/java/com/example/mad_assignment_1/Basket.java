@@ -16,8 +16,7 @@ import java.util.Map;
 
 public class Basket implements Serializable {
 
-    private Map mapBasket;
-    private BasketDish bd;
+    private final Map mapBasket;
     private float total;
     public Basket(){
         mapBasket = new HashMap<String, BasketDish>();
@@ -29,20 +28,22 @@ public class Basket implements Serializable {
     }
 
     public void add(Dish inDish){
-       if (mapBasket.get(inDish.getName()) == null){
-           bd = new BasketDish(inDish);
-           mapBasket.put(bd.getDishName(), bd);
-       }
-       else{
-          bd = (BasketDish) mapBasket.get(inDish.getName());
-          bd.addCount();
-       }
+        BasketDish bd;
+        if (mapBasket.get(inDish.getName()) == null){
+            bd = new BasketDish(inDish);
+            mapBasket.put(bd.getDishName(), bd);
+        }
+        else{
+            bd = (BasketDish) mapBasket.get(inDish.getName());
+            bd.addCount();
+        }
+
         total+=inDish.getPrice();
     }
 
     public void minus(Dish inDish){
         if (mapBasket.get(inDish.getName()) != null){
-            bd = (BasketDish) mapBasket.get(inDish.getName());
+            BasketDish bd = (BasketDish) mapBasket.get(inDish.getName());
             bd.minusCount();
             total-=inDish.getPrice();
             if (bd.getCount() == 0){
@@ -54,7 +55,7 @@ public class Basket implements Serializable {
     public int getCount(Dish dish){
         int i = 0;
         if (mapBasket.get(dish.getName()) != null){
-            bd = (BasketDish) mapBasket.get(dish.getName());
+            BasketDish bd = (BasketDish) mapBasket.get(dish.getName());
             i = bd.getCount();
         }
         return i;

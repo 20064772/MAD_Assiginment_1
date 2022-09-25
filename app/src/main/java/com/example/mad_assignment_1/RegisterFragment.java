@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +46,7 @@ public class RegisterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(CheckoutViewModel.class);
-        viewModel.getBasket();
+        basket = viewModel.getBasket();
 
     }
 
@@ -56,33 +57,37 @@ public class RegisterFragment extends Fragment {
         EditText password = (EditText) v.findViewById(R.id.password);
         Button register = (Button) v.findViewById(R.id.register);
 
+        DBModel db = new DBModel(getContext());
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String userEmail = email.getText().toString();
-               // String userPass = password.getText().toString();
-                Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
-                startActivity(intent);
-                /**
-                need to get access to and Query the DB to check user email exists already.
-                If it doesnt the user needs to be added to the database and the basket needs to be added to the orderHistory table
+                String userEmail = email.getText().toString();
+                String userPass = password.getText().toString();
+
                 if (userEmail.isEmpty() || userPass.isEmpty()){
-                    email.setText(null);
-                    password.setText(null);
+                    email.setText("");
+                    password.setText("");
                     Toast.makeText(getActivity(),"Please enter into both fields",Toast.LENGTH_SHORT).show();
                 }
-                else if (? db with email != null){
-                    email.setText(null);
-                    password.setText(null);
-                    Toast.makeText(getActivity(),"The email is already attached to an account",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                else try
+                {
+                    db.addUser(userEmail, userPass);
+                    db.addToOrderHistory(basket, userEmail);
+                    db.close();
+
                     Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
                     startActivity(intent);
                 }
-                 */
+                catch(IllegalArgumentException e)
+                {
+                    email.setText("");
+                    password.setText("");
+                    Toast.makeText(getActivity(),"The email is already attached to an account",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         return v;
     }
 }
