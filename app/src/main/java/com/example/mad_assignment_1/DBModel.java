@@ -12,6 +12,8 @@ import com.example.mad_assignment_1.DBSchema.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Database Model Class - Facilitates database table manipulation
@@ -68,13 +70,28 @@ public class DBModel
      */
     public boolean findUser(String email, String passwd)
     {
+        boolean userExists;
         UserCursor cursor = new UserCursor(db.query(UserTable.NAME, null,
                 UserTable.Columns.EMAIL + " = ? AND " + UserTable.Columns.PASS + " = ?",
                 new String[]{email, hashPasswd(passwd)}, null, null, "1"));
-
-        if(cursor.getCount() == 0) return false;
-        else return true;
+        
+        try
+        {
+            if (cursor.getCount() == 0) userExists = false;
+            else userExists = true;
+        }
+        finally { cursor.close(); }
+        
+        return userExists;
     }
+    
+    public List<Restaurant> getRestaurants()
+    {
+        List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+        
+        
+    }
+    
     /**
      * Hashes a given password with SHA-512
      *
