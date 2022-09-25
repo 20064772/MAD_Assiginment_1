@@ -17,11 +17,13 @@ import com.example.mad_assignment_1.DBSchema.RestaurantTable;
         super(cursor);
     }
     
-    public Restaurant getRestaurant(Menu menu)
+    public String getName()
     {
-        return new Restaurant(
-                getString(getColumnIndex(RestaurantTable.Columns.REST)),
-                getInt(getColumnIndex(RestaurantTable.Columns.LOGO)),
-                menu);
+        return getString(getColumnIndex(RestaurantTable.Columns.REST));
+    }
+
+    public int getDrawable()
+    {
+        return getInt(getColumnIndex(RestaurantTable.Columns.LOGO));
     }
 }
