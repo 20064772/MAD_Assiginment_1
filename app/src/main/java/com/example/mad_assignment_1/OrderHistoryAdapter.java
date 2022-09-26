@@ -37,21 +37,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryViewHo
 
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryViewHolder holder, int position) {
-        /*
-         * need to set the below to the data pulled from the DB/object
-         * commented out so the program runs
-         */
-        //holder.resName.setText();
-        //holder.dateTime.setText();
-        /*
-         *  was thinking a FOR loop for each dish in some list ie:
-         *  For (Dish i : orderHistorydishlist)
-         *         {
-         *             holder.orderHistory.append("Dish: "i.getItem() + " Quant: " + i.getCount() +"\n"  );
-         *         }
-         *
-         */
-        //holder.cost.setText();
+
         holder.bind(orders.get(position));
     }
 

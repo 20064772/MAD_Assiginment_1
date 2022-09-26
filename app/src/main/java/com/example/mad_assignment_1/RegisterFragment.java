@@ -76,7 +76,7 @@ public class RegisterFragment extends Fragment {
                     db.addToOrderHistory(basket, userEmail);
                     db.close();
 
-                    Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
+                    Intent intent = new Intent(getActivity(), OrderHistoryActivity.class).putExtra("Email", userEmail);
                     startActivity(intent);
                 }
                 catch(IllegalArgumentException e)

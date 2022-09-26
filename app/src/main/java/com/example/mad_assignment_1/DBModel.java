@@ -135,7 +135,7 @@ public class DBModel
         Dish dish;
 
         try (OrderHistoryCursor cursor = new OrderHistoryCursor(db.query(OrderHistoryTable.NAME, null,
-                OrderHistoryTable.Columns.USER + " = ?", new String[]{user}, null, null,
+                OrderHistoryTable.Columns.USER + " = " + user, null, null, null,
                 OrderHistoryTable.Columns.DATETIME + " ASC"))) {
             cursor.moveToFirst();
 
@@ -158,6 +158,8 @@ public class DBModel
 
                 cursor.moveToNext();
             }
+
+            orderList.add(curOrder);
         }
 
         return orderList;
