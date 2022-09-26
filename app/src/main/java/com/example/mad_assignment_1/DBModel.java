@@ -139,7 +139,7 @@ public class DBModel
                 OrderHistoryTable.Columns.DATETIME + " ASC"))) {
             cursor.moveToFirst();
 
-            while (!cursor.isAfterLast()) {
+            while (!cursor.isAfterLast()) {//here  while (!cursor.isAfterLast())
                 date = cursor.getDateTime();
                 /* If the date being read is different to the current date
                     value stored, pop the current order onto the list and start
