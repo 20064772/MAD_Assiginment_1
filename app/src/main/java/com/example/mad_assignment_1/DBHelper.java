@@ -205,13 +205,13 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.hj_whopper, "Whopper", "Our famous flame grilled burger", 9.0),
                 new Dish(R.drawable.hj_whopper_with_cheese, "Whopper with Cheese", "Our famous flame grilled burger with cheese", 9.50),
                 new Dish(R.drawable.hj_ultimate_double_whopper, "Ultimate Whopper", "A whopper with double beef, double cheese and bacon", 12.0),
-                new Dish(R.drawable.hj_fried_chicken_classic, "Fried Chicken Classic Burger", "Fried chicken burger", 10.0)
+                new Dish(R.drawable.hj_fried_chicken_classic, "Fried Chicken Burger", "Fried chicken burger", 10.0)
         });
 
         /* KFC */
         addDishes(db, restaurantNames[2], new Dish[]{
-                new Dish(R.drawable.kfc_original_recipe, "Original Recipe Fried Chicken", "Our world famous fried chicken coated in 7 secret herbs and spices", 15.0),
-                new Dish(R.drawable.kfc_original_recipe_buger, "Original Recipe Fried Chicken Burger", "Our world famous fried chicken coated in 7 secret herbs and spices in a burger", 12.0),
+                new Dish(R.drawable.kfc_original_recipe, "Original Recipe Chicken", "Our world famous fried chicken coated in 7 secret herbs and spices", 15.0),
+                new Dish(R.drawable.kfc_original_recipe_buger, "Original Chicken Burger", "Our world famous fried chicken coated in 7 secret herbs and spices in a burger", 12.0),
                 new Dish(R.drawable.kfc_zinger_burger, "Zinger Burger", "Spicy fried chicken burger", 12.0),
                 new Dish(R.drawable.kfc_twister, "Twister Wrap", "Our world famous fried chicken in a wrap", 12.0),
                 new Dish(R.drawable.kfc_popcorn_chicken, "Popcorn Chicken", "small pieces of fried chicken", 10.0),
@@ -255,7 +255,7 @@ public class DBHelper extends SQLiteOpenHelper
                 new Dish(R.drawable.subway_chicken_teriyak, "Chicken Teriyaki Sub", "12 inch sub with teriyaki chicken", 13.0),
                 new Dish(R.drawable.subway_meatball_sub, "Meatball Sub", "12 inch sub with meatballs and red sauce", 13.20),
                 new Dish(R.drawable.subway_steak_melt, "Steak Melt sub", "12 inch sub with steak strips and melted cheese", 14.0),
-                new Dish(R.drawable.subway_whitechipmacadamianutcookie, "White Chocolate Macadamia Cookie", "Fresh cookie with white chocolate pieces and macadamia nuts", 3.0),
+                new Dish(R.drawable.subway_whitechipmacadamianutcookie, "Macadamia Cookie", "Fresh cookie with white chocolate pieces and macadamia nuts", 3.0),
                 new Dish(R.drawable.subway_chocolatechipcookie, "Choc Chip Cookie", "Fresh chocolate chip cookie", 3.0)
         });
 
