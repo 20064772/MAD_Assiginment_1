@@ -37,5 +37,12 @@ public class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
         resName.setText(order.getRestaurant());
         dateTime.setText(order.getDateTime());
         cost.setText(String.valueOf(order.getTotal()));
+        for(Object obj : order.getDishes().getMapBasket().values())
+        {
+            if(obj instanceof BasketDish) {
+                BasketDish bd = (BasketDish) obj;
+                orderHistory.append("Dish: " + bd.getDish().getName() + " Quant: " + bd.getCount() + "\n");
+            }
+        }
     }
 }
