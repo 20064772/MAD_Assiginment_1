@@ -33,9 +33,9 @@ public class Order
         return this.date_time;
     }
 
-    public String getUser()
+    public Basket getDishes()
     {
-        return this.user;
+        return this.dishes;
     }
 
     public float getTotal()
