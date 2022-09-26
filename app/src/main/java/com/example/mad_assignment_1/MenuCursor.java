@@ -28,4 +28,9 @@ public class MenuCursor extends CursorWrapper {
                 getDouble(getColumnIndex(MenuTable.Columns.PRICE))
         );
     }
+
+    public String getRestaurant()
+    {
+        return getString(getColumnIndex(MenuTable.Columns.REST));
+    }
 }

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class OrderHistoryActivity extends AppCompatActivity {
 
     TextView emailview;
@@ -24,14 +26,15 @@ public class OrderHistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
-        //emailview = findViewById(R.id.emaildisplay); /** need to set this to the user email from DB */
-        /**
-         *  I think an object will need to be created to store the each order for the user.
-         *  then pass the object to the adapter. I havent created anything.
-         */
+        emailview = findViewById(R.id.emaildisplay);
+        emailview.setText(getIntent().getStringExtra("Email"));
+
+        DBModel db = new DBModel(getApplicationContext());
+        ArrayList<Order> orders = db.getOrders((String) emailview.getText());
+
         RecyclerView rv = findViewById(R.id.orderhistoryrecview);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        OrderHistoryAdapter orderHistoryAdapter = new OrderHistoryAdapter(/** some object*/);
+        OrderHistoryAdapter orderHistoryAdapter = new OrderHistoryAdapter(orders);
         rv.setAdapter(orderHistoryAdapter);
 
     }

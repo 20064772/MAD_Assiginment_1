@@ -12,7 +12,8 @@ import com.example.mad_assignment_1.DBSchema.RestaurantTable;
  * @author          Tristan S. Tutungis
  * @date_created    22/09/2022
  * @last_modified   25/09/2022 10:57
- */public class RestaurantCursor extends CursorWrapper {
+ */
+public class RestaurantCursor extends CursorWrapper {
     public RestaurantCursor(Cursor cursor) {
         super(cursor);
     }

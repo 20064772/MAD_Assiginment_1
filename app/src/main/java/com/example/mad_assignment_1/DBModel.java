@@ -3,9 +3,6 @@ package com.example.mad_assignment_1;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import com.example.mad_assignment_1.DBSchema.*;
 
@@ -14,7 +11,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Database Model Class - Facilitates database table manipulation
@@ -77,15 +73,12 @@ public class DBModel
     public boolean findUser(String email, String passwd)
     {
         boolean userExists;
-        UserCursor cursor = new UserCursor(db.query(UserTable.NAME, null,
-                UserTable.Columns.EMAIL + " = ? AND " + UserTable.Columns.PASS + " = ?",
-                new String[]{email, hashPasswd(passwd)}, null, null, "1"));
 
-        try
-        {
+        try (UserCursor cursor = new UserCursor(db.query(UserTable.NAME, null,
+                UserTable.Columns.EMAIL + " = ? AND " + UserTable.Columns.PASS + " = ?",
+                new String[]{email, hashPasswd(passwd)}, null, null, "1"))) {
             userExists = cursor.getCount() != 0;
         }
-        finally { cursor.close(); }
         
         return userExists;
     }
@@ -99,21 +92,17 @@ public class DBModel
     {
         ArrayList<Restaurant> restaurantList = new ArrayList<>();
         String restaurantName;
-        RestaurantCursor restCursor = new RestaurantCursor(
-                db.query(RestaurantTable.NAME, null, null, null, null, null, null));
 
-        try
-        {
+        try (RestaurantCursor restCursor = new RestaurantCursor(
+                db.query(RestaurantTable.NAME, null, null, null, null, null, null))) {
             restCursor.moveToFirst();
-            while(!restCursor.isAfterLast())
-            {
+            while (!restCursor.isAfterLast()) {
                 restaurantName = restCursor.getName();
 
                 restaurantList.add(new Restaurant(restaurantName, restCursor.getDrawable(), getMenu(restaurantName)));
                 restCursor.moveToNext();
             }
         }
-        finally{ restCursor.close(); }
 
         return restaurantList;
     }
@@ -138,10 +127,82 @@ public class DBModel
         }
     }
 
-    public ArrayList<Order> getOrders()
+    public ArrayList<Order> getOrders(String user)
     {
-        return null;
+        ArrayList<Order> orderList = new ArrayList<>();
+        String date, curDate = "";
+        Order curOrder = null;
+        Dish dish;
+
+        try (OrderHistoryCursor cursor = new OrderHistoryCursor(db.query(OrderHistoryTable.NAME, null,
+                OrderHistoryTable.Columns.USER + " = ?", new String[]{user}, null, null,
+                OrderHistoryTable.Columns.DATETIME + " ASC"))) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                date = cursor.getDateTime();
+                /* If the date being read is different to the current date
+                    value stored, pop the current order onto the list and start
+                    a new one */
+                if (!curDate.equals(date)) {
+                    if (!curDate.equals("")) {
+                        orderList.add(curOrder);
+                    }
+
+                    curDate = date;
+                    curOrder = new Order(curDate, user, findRestaurant(cursor.getDishName()));
+                }
+
+                dish = findDish(cursor.getDishName());
+                curOrder.addDish(dish, cursor.getQty());
+
+                cursor.moveToNext();
+            }
+        }
+
+        return orderList;
     }
+
+    private String findRestaurant(String dishName)
+    {
+        String rest;
+        MenuCursor cursor = new MenuCursor(db.query(MenuTable.NAME, null,
+                MenuTable.Columns.ITEM + " = ?",
+                new String[]{dishName}, null, null, null));
+
+        try
+        {
+            cursor.moveToFirst();
+            rest = cursor.getRestaurant();
+        }
+        finally
+        {
+            cursor.close();
+        }
+
+        return rest;
+    }
+
+    private Dish findDish(String dishName)
+    {
+        Dish dish;
+        MenuCursor cursor = new MenuCursor(db.query(MenuTable.NAME, null,
+                MenuTable.Columns.ITEM + " = ?",
+                new String[]{dishName}, null, null, null));
+
+        try
+        {
+            cursor.moveToFirst();
+            dish = cursor.getDish();
+        }
+        finally
+        {
+            cursor.close();
+        }
+
+        return dish;
+    }
+
     /**
      * Retrieves a menu for a given restaurant from the DB
      *
@@ -180,13 +241,13 @@ public class DBModel
      */
     private String hashPasswd(String passwd)
     {
-        String hashedPasswd = null;
+        String hashedPasswd;
         try
         {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             hashedPasswd = new String(md.digest(passwd.getBytes(StandardCharsets.UTF_8)));
         }
-        catch (NoSuchAlgorithmException e) {}
+        catch (NoSuchAlgorithmException e) {hashedPasswd = null;}
         return hashedPasswd;
     }
 }

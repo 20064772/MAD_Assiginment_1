@@ -13,12 +13,19 @@ public class Order
     private Basket dishes;
     private String date_time;
     private String user;
+    private String rest;
 
-    public Order(String date_time, String user)
+    public Order(String date_time, String user, String rest)
     {
         this.dishes = new Basket();
         this.date_time = date_time;
         this.user = user;
+        this.rest = rest;
+    }
+
+    public String getRestaurant()
+    {
+        return this.rest;
     }
 
     public String getDateTime()
@@ -29,6 +36,16 @@ public class Order
     public String getUser()
     {
         return this.user;
+    }
+
+    public float getTotal()
+    {
+        return dishes.getTotal();
+    }
+
+    public void setRestaurant(String restaurant)
+    {
+        this.rest = restaurant;
     }
 
     public void addDish(Dish dish, int qty)

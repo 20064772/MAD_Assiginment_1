@@ -22,6 +22,7 @@ public class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
     TextView dateTime;
     TextView orderHistory;
     TextView cost;
+
     public OrderHistoryViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -29,7 +30,12 @@ public class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
         dateTime = itemView.findViewById(R.id.dateandtime);
         orderHistory = itemView.findViewById(R.id.orderhistory);
         cost = itemView.findViewById(R.id.cost);
+    }
 
-
+    public void bind(Order order)
+    {
+        resName.setText(order.getRestaurant());
+        dateTime.setText(order.getDateTime());
+        cost.setText(String.valueOf(order.getTotal()));
     }
 }

@@ -1,7 +1,7 @@
 /**
- * OrderHistoryAdaptor. adapter for the orderHistory rcyclervieew
+ * Adapter for the orderHistory recyclerview
  *
- * @class           OrderHistoryAdaptor
+ * @class           OrderHistoryAdaptr
  * @extends         RecyclerView.Adapter
  * @author          Ryan Mckenney
  * @date_created    20/09/2022
@@ -16,12 +16,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryViewHolder> {
 
-    public OrderHistoryAdapter(/**some data type*/){
-        /**
-         * need to pass in the oder history
-         */
+    ArrayList<Order> orders;
+    public OrderHistoryAdapter(ArrayList<Order> orders){
+        this.orders = orders;
     }
 
 
@@ -36,13 +37,13 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryViewHo
 
     @Override
     public void onBindViewHolder(@NonNull OrderHistoryViewHolder holder, int position) {
-        /**
+        /*
          * need to set the below to the data pulled from the DB/object
          * commented out so the program runs
          */
         //holder.resName.setText();
         //holder.dateTime.setText();
-        /**
+        /*
          *  was thinking a FOR loop for each dish in some list ie:
          *  For (Dish i : orderHistorydishlist)
          *         {
@@ -51,14 +52,11 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryViewHo
          *
          */
         //holder.cost.setText();
-
+        holder.bind(orders.get(position));
     }
 
     @Override
     public int getItemCount() {
-        /**
-        * need to number of seperate orders for the user
-         * */
-        return 20;
+        return orders.size();
     }
 }

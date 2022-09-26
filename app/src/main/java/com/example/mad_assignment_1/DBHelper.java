@@ -101,7 +101,7 @@ public class DBHelper extends SQLiteOpenHelper
                 "FOREIGN KEY (" + MenuTable.Columns.REST +
                 ") REFERENCES " + RestaurantTable.NAME +
                 " (" + RestaurantTable.Columns.REST +
-                ") ON DELETE CASCADE ON UPDATE NO ACTION )"
+                "))"
         );
 
         /* Creates Order History Table */
@@ -117,11 +117,11 @@ public class DBHelper extends SQLiteOpenHelper
                 "FOREIGN KEY (" + OrderHistoryTable.Columns.USER +
                 ") REFERENCES " + UserTable.NAME +
                 " (" + UserTable.Columns.EMAIL +
-                ") ON DELETE CASCADE ON UPDATE NO ACTION, " +
-                "FOREIGN KEY (" + OrderHistoryTable.Columns.ITEM +
+                "))"
+                /*"FOREIGN KEY (" + OrderHistoryTable.Columns.ITEM +
                 ") REFERENCES " + MenuTable.NAME +
                 " (" + MenuTable.Columns.ITEM +
-                ") ON DELETE CASCADE ON UPDATE NO ACTION )"
+                "))"*/ /* This doesn't work. Can't figure out why */
         );
     }
 
