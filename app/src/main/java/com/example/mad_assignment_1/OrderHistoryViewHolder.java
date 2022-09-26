@@ -37,5 +37,6 @@ public class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
         resName.setText(order.getRestaurant());
         dateTime.setText(order.getDateTime());
         cost.setText(String.valueOf(order.getTotal()));
+
     }
 }
